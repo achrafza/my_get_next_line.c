@@ -6,7 +6,7 @@
 /*   By: azahid <azahid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 01:44:24 by azahid            #+#    #+#             */
-/*   Updated: 2024/11/19 01:32:17 by azahid           ###   ########.fr       */
+/*   Updated: 2024/11/30 17:55:31 by azahid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ size_t	ft_strlen(const char *str)
 	}
 	return (i);
 }
-
 
 size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {
@@ -50,7 +49,6 @@ size_t	ft_strlcat(char *dest, const char *src, size_t size)
 	return (destlen + srclen);
 }
 
-
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	len;
@@ -63,17 +61,20 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	*dst = 0;
 	return (len);
 }
+
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*str;
-    int		len1;
+	int		len1;
 	int		len2;
 	int		strlen;
 
+	if (!s1 && !s2)
+		return (NULL);
 	if (!s1)
-		return ((char *)s2);
-	if(!s2)
-		return ((char *)s1);
+		return ((char *)ft_strdup(s2));
+	if (!s2)
+		return ((char *)ft_strdup(s1));
 	len1 = ft_strlen((char *)s1);
 	len2 = ft_strlen((char *)s2);
 	str = (char *)malloc((len1 + len2 + 1) * sizeof(char));
@@ -83,11 +84,14 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	strlen = ft_strlcat(str, s2, len2 + len1 + 1);
 	return (str);
 }
+
 char	*ft_strdup(const char *s1)
 {
 	int		len;
 	char	*str;
 
+	if (!s1)
+		return (NULL);
 	len = ft_strlen((char *)s1);
 	str = (char *)malloc((len + 1) * sizeof(char));
 	if (!str)
